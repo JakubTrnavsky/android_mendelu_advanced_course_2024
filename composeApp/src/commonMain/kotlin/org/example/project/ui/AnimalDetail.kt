@@ -29,6 +29,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun AnimalDetail(
     animal: Animal,
+    showBackButton: Boolean = true,
     onBackClick: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
@@ -39,16 +40,18 @@ fun AnimalDetail(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f))
-                .padding(8.dp)
+                .padding(horizontal = 8.dp)
         ) {
-            IconButton(
-                modifier = Modifier.align(Alignment.TopStart),
-                onClick = onBackClick
-            ) {
-                Image(
-                    painter = painterResource(Res.drawable.ic_back),
-                    contentDescription = "Back"
-                )
+            if (showBackButton) {
+                IconButton(
+                    modifier = Modifier.align(Alignment.TopStart),
+                    onClick = onBackClick
+                ) {
+                    Image(
+                        painter = painterResource(Res.drawable.ic_back),
+                        contentDescription = "Back"
+                    )
+                }
             }
         }
 

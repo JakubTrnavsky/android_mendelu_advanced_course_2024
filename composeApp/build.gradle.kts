@@ -66,6 +66,9 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.multiplatform.material3.adaptive.base)
+            implementation(libs.compose.multiplatform.material3.adaptive.layout)
+            implementation(libs.compose.multiplatform.material3.adaptive.navigation)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
         }
