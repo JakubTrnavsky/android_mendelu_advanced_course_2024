@@ -1,25 +1,36 @@
 package org.example.project
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-import animalsencyclopedia.composeapp.generated.resources.Res
-import animalsencyclopedia.composeapp.generated.resources.compose_multiplatform
+import org.example.project.data.Animal
+import org.example.project.data.AnimalMock
+import org.example.project.ui.AnimalDetail
+import org.example.project.ui.AnimalList
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
+        val animals = remember { AnimalMock.mockList() }
+        var selectedAnimalState by remember { mutableStateOf<Animal?>(null) }
 
+        when (val selectedAnimal = selectedAnimalState) {
+            null -> {
+                AnimalList(
+                    animals = animals,
+                    onItemClick = { clickedAnimal ->
+                        selectedAnimalState = clickedAnimal
+                    },
+                )
+            }
+            else -> {
+                AnimalDetail(
+                    animal = selectedAnimal,
+                    onBackClick = { selectedAnimalState = null },
+                )
+            }
+        }
     }
 }
