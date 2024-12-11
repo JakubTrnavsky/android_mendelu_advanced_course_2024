@@ -31,6 +31,7 @@ fun AnimalDetail(
     animal: Animal,
     showBackButton: Boolean = true,
     onBackClick: () -> Unit = {},
+    onCopyText: (String) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -52,6 +53,15 @@ fun AnimalDetail(
                         contentDescription = "Back"
                     )
                 }
+            }
+            IconButton(
+                modifier = Modifier.align(Alignment.TopEnd),
+                onClick = { onCopyText("${animal.name}\n${animal.description}") }
+            ) {
+                Image(
+                    painter = painterResource(Res.drawable.ic_copy),
+                    contentDescription = "Copy"
+                )
             }
         }
 

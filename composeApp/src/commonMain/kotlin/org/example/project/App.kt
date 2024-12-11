@@ -23,6 +23,7 @@ fun App() {
     MaterialTheme {
         val navigator = rememberListDetailPaneScaffoldNavigator<Animal>()
         val animals = remember { AnimalMock.mockList() }
+        val clipboard = remember { getClipboard() }
 
         ListDetailPaneScaffold(
             modifier = Modifier.fillMaxSize(),
@@ -47,6 +48,7 @@ fun App() {
                             animal = animal,
                             showBackButton = navigator.canNavigateBack(),
                             onBackClick = { navigator.navigateBack() },
+                            onCopyText = { clipboard.setString(it) },
                         )
                     }
                 }
