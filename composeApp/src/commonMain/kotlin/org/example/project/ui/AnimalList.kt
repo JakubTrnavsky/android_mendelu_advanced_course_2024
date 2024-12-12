@@ -3,6 +3,8 @@ package org.example.project.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,23 +28,33 @@ fun AnimalList(
     modifier: Modifier = Modifier,
 ) {
     val state = rememberLazyListState()
-    LazyColumn(
+
+    Row(
         modifier = modifier
-            .background(Color(0xFF7fb2d3)),
-        state = state
     ) {
-        items(items = animals) { animal ->
-            AnimalListItem(
-                animal = animal,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onItemClick(animal) }
-                    .padding(
-                        horizontal = 16.dp,
-                        vertical = 4.dp
-                    )
-            )
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f)
+                .background(Color(0xFF7fb2d3)),
+            state = state
+        ) {
+            items(items = animals) { animal ->
+                AnimalListItem(
+                    animal = animal,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onItemClick(animal) }
+                        .padding(
+                            horizontal = 16.dp,
+                            vertical = 4.dp
+                        )
+                )
+            }
         }
+        VerticalScrollbarMultiplatform(
+            modifier = Modifier.fillMaxHeight(),
+            lazyListState = state,
+        )
     }
 }
 
